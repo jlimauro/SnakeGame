@@ -5,9 +5,15 @@ var s;
 var scl = 20;
 var food;
 var score = 0;
+var canvas, scoreDiv;
 
 function setup() {
-  createCanvas(600,600);
+ scoreDiv = createDiv("Score: " + score);
+ scoreDiv.parent('myContainer');
+ scoreDiv.style('padding-bottom','10px');
+ canvas = createCanvas(600,600);
+ canvas.parent('myContainer');
+ 
   s = new Snake();
   frameRate(8);
   pickLocation();
@@ -20,10 +26,10 @@ function pickLocation() {
   food.mult(scl);
 }
 
-// for debugging:
-function mousePressed() {
-  s.total++;
-}
+//// for debugging:
+//function mousePressed() {
+//  s.total++;
+//}
 
 function draw() {
   
@@ -34,10 +40,11 @@ function draw() {
   
   s.death();
   s.update();
-  s.show();
-    
+  s.show();    
   fill(255,0,100);
   rect(food.x, food.y, scl, scl);
+  
+  scoreDiv.html('Score: ' + score);
 }
 
 function keyPressed() {
